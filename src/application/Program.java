@@ -47,6 +47,15 @@ import model.entities.Seller;
 		sellerDao.insert(newSeller);
 		
 		System.out.println("Inserted new Id = " + newSeller.getId());
+		
+		System.out.println();
+		
+		System.out.println("=== TEST 5: seller update  =====");
+		
+		seller = sellerDao.findById(1);
+		seller.setName("Marta Ueine");
+		sellerDao.update(seller);
+		System.out.println("Updated Completed! ");
 
 	}
 
