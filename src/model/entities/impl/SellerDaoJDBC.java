@@ -57,17 +57,9 @@ public class SellerDaoJDBC implements SellerDao{
 			// tirar da coluna de uma tabela e colocar de uma forma que a linguagem possa exibir
 			
 			if (rs.next()) {
-				Departament dep = new Departament();
-				dep.setId(rs.getInt("DepartamentId"));
-				dep.setName(rs.getString("DepName"));
+				Departament dep = instantiateDepartament(rs);
 				
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setBirthDate(rs.getDate("BirthDate"));
-				obj.setDepartament(dep);
+				Seller obj = instantiateSeller(rs, dep);
 				
 				return obj;
 			}
@@ -81,6 +73,26 @@ public class SellerDaoJDBC implements SellerDao{
 			DB.closeResultSet(rs);
 		}
 	
+	}
+
+	private Seller instantiateSeller(ResultSet rs, Departament dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setDepartament(dep);
+		
+		return obj;
+		
+	}
+
+	private Departament instantiateDepartament(ResultSet rs) throws SQLException {
+		 Departament dep = new Departament();
+			dep.setId(rs.getInt("DepartamentId"));
+			dep.setName(rs.getString("DepName"));
+			return dep;
 	}
 
 	@Override
