@@ -12,7 +12,7 @@ public interface DepartamentDao {
 	
 	void deleteById(Integer id);
 	
-	Departament findById(Integer Id);
+	Departament findById(Integer id);
 	
 	List<Departament> findAll();
 	
